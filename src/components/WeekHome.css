@@ -1,0 +1,121 @@
+.week-Wrapper{
+    width: 80%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    /* border: 1px solid #ddd; */
+    border-radius: 10px;
+    margin: auto;
+}
+
+.week-Header-Wrapper{
+    text-align: center;
+}
+
+.week-availableHeader{
+    padding: 2%;
+    color: #ef7238;
+    font-family: 'Monsterrat',sans-serif;
+    font-size: 22px;
+    overflow-wrap: break-word;
+    text-align:center;
+    /* border: 1px solid #000; */
+}
+
+.week-Slider-Body-Wrapper{
+    display:flex;
+    /* border:1px solid red; */
+}
+
+.week-Slider-Body-Left{
+    display:flex;
+    width: 20%;
+    /* border: 1px solid blue; */
+    justify-content:center;
+}
+
+.week-Slider-Left-Label{
+    display: block;
+    /* border: 1px solid green; */
+    width: 60%;
+    font-size: 17px;
+    font-weight: 700;
+    color: #000;
+    padding: 2px 5px;
+    text-align: center;
+    margin: 50px 0;
+}
+
+.week-Slider-Left-Value{
+    /* border:1px solid green; */
+    width: 40%;
+    text-align: center;
+    margin:50px 0;
+}
+
+.week-Slider-Active{
+    position: relative;
+    cursor: pointer;
+    transform: scale(1.5);
+    accent-color: gray;
+    margin: 5px;
+}
+
+.week-Slider-Body-Center{
+    width: 80%;
+    /* border: 1px solid blue; */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+    padding: 15px 30px;
+}
+
+.week-Slider-Body-Days{
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    /* border: 2px solid #ddd; */
+}
+
+.week-Slider-Body-Right{
+    width: 20%;
+    /* border: 1px solid blue; */
+}
+
+.week-AddDays{
+    margin: auto;
+
+    width:20%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.week-AddButton{
+    font-size: 28px;
+    background-color:transparent;
+    border: 1px solid transparent;
+    outline: none;
+}
+
+.week-AddButton:hover{
+    cursor: pointer;
+    padding: 0px 8px;
+    border-color: #1E556B;
+    background-color: #fff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.week-Data-Save{
+    padding: 12px;
+    background: #ef7238;
+    color: #fff;
+    width: 100px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    margin: 2%;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.week-Data-Save:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}

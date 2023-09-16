@@ -1,0 +1,23 @@
+.Track{
+    display: block;
+    position: relative;
+    background-color: #1E556B;
+    height: 3px;
+    transform: translateY(-50%);
+}
+
+.disabledColor{
+    display: block;
+    position: relative;
+    background-color: #ddd;
+    height: 3px;
+    transform: translateY(-50%);
+}
+
+.Slider1{
+ top: -38px;
+}
+
+.Slider2{
+    top: -41px;
+}
