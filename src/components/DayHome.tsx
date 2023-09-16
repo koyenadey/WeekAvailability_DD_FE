@@ -71,7 +71,7 @@ const DayHome = ({isVisible,daysToBeVisible,daysOfWeek,setDaysOfWeek}:DayHomePro
                 <DaySlider 
                   isActive={day.isActive} 
                   initialSlideValue={day.daysAvailable}
-                  onDayChange={()=>handleAddDays(day)}
+                  onDayChange={(newValue)=>handleAddDays(day,newValue)}
                    /*onDayChange={(newValue:number[])=>handleAddDays(day,newValue)}*/ 
                  />
               <div className="addDays">
