@@ -34,12 +34,15 @@ const getDayNames = (daysRange:number[]):string[] =>{
         }
     }
     return daysToDisplay;
-}
+};
 
-
+export const getUpdatedSortedData = (data:Day[]):Day[] =>{
+    const currentDay: number = new Date().getDay();
+    const currDayFromData = data.slice(currentDay);
+    return currDayFromData.concat(data.slice(0,currentDay));
+};
 
 const WeekHome = () =>{
-    //const daysOfweek = WeekDays.getAvailableDays();
     const [weekAvailable,setWeekAvail] = useState<Week[]>([]);
     const [daysOfWeek, setDaysOfWeek] = useState<Day[]>([]);  
     useEffect(()=>{
@@ -54,35 +57,28 @@ const WeekHome = () =>{
             .then((data)=>setDaysOfWeek(data));
     },[]);
 
-    const handleWeekChange = (week:Week,weekDaysSelected?:number[]) =>{
-        const nottoBeUpdatedWeek = weekAvailable.filter(weekDay=>weekDay.id !== week.id);
-        const newDaysInWeekAvail = week.daysAvailable.length === 2?[...week.daysAvailable,5,6]:week.daysAvailable.slice(0,2);
-        //console.log(nottoBeUpdatedWeek);
-        const finalDaysAvailInWeek = [
-            ...nottoBeUpdatedWeek,
-            {
-                id: week.id,
-                weekNum: week.weekNum,
-                isActive: week.isActive,
-                daysAvailable: weekDaysSelected ?? newDaysInWeekAvail
-            }
-        ].sort((a,b) => a.id - b.id);
-        setWeekAvail(finalDaysAvailInWeek);
-    };
-
-    const handleAddAvailDays = (week:Week):void =>{
+    const updateWeekAvailability = (week: Week, isActive: boolean, daysAvailable: number[]) => {
         const daysNotTobeUpdated = weekAvailable.filter(weekDay=>weekDay.id!==week.id);
         
         const newFinalDayAvail = [
             ...daysNotTobeUpdated,
             {
-                id:week.id,
+                id: week.id,
                 weekNum: week.weekNum,
-                isActive: !week.isActive,
-                daysAvailable: week.daysAvailable
+                isActive: isActive,
+                daysAvailable: daysAvailable
             }
         ].sort((a,b)=>a.id - b.id);
         setWeekAvail(newFinalDayAvail);
+    };
+
+    const handleWeekChange = (week:Week, weekDaysSelected?:number[]) =>{
+        const newDaysInWeekAvail = week.daysAvailable.length === 2?[...week.daysAvailable,5,6]:week.daysAvailable.slice(0,2);
+        updateWeekAvailability(week, week.isActive, weekDaysSelected ?? newDaysInWeekAvail);
+    };
+
+    const handleAddAvailDays = (week:Week):void =>{
+        updateWeekAvailability(week, !week.isActive, week.daysAvailable);
     };
 
     const handleDataSave = (e:React.MouseEvent<HTMLButtonElement>) =>{
@@ -134,19 +130,30 @@ const WeekHome = () =>{
                         </div>
                     </div>
                     <div className='week-Slider-Body-Center'>
-                        <WeekSlider initialSlideValue={week.daysAvailable} isActive={week.isActive} onWeekChange={(weekDaysSelected)=>handleWeekChange(week, weekDaysSelected)} />
+                        <WeekSlider 
+                            initialSlideValue={week.daysAvailable} 
+                            isActive={week.isActive} 
+                            onWeekChange={(weekDaysSelected)=>handleWeekChange(week, weekDaysSelected)} 
+                        />
                         <div className='week-Slider-Body-Days'>
                             <DayHome 
                                 isVisible={week.isActive?'block':'none'} 
                                 daysToBeVisible={getDayNames(week.daysAvailable)} 
                                 daysOfWeek = {daysOfWeek}
-                                setDaysOfWeek = {setDaysOfWeek}
+                                setDaysOfWeek = {(data) => {
+                                    const sortedDays = getUpdatedSortedData(data);
+                                    setDaysOfWeek(sortedDays);
+                                }}
                              />
                         </div>
                     </div>
                     <div className='week-Slider-Body-Right'>
                         <div className="week-AddDays">
-                            <button className="week-AddButton" disabled={!week.isActive} onClick={()=>handleWeekChange(week)}>{week.daysAvailable.length===2?'+':'-'}</button>
+                            <button 
+                                className="week-AddButton" 
+                                disabled={!week.isActive} 
+                                onClick={()=>handleWeekChange(week)}>{week.daysAvailable.length===2?'+':'-'}
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -9,22 +9,10 @@ interface DaySliderProp{
 }
 
 const hour =[
-    {
-        value: 6,
-        label: '6'
-    },
-    {
-        value: 12,
-        label: '12'
-    },
-    {
-        value: 18,
-        label: '18'
-    },
-    {
-        value: 24,
-        label: '24'
-    }
+    { value: 6, label: '6' },
+    { value: 12, label: '12' },
+    { value: 18, label: '18' },
+    { value: 24, label: '24' }
 ]
 
 
@@ -98,8 +86,14 @@ const DaySlider = ({isActive,initialSlideValue,onDayChange}:DaySliderProp) =>{
             sx={sxVal}
             disableSwap={true}
         />
-        <span className={isActive?'Track Slider1':'Slider1 disabledColor'} style={{left:`${trackMinPos1}%`, width:`${trackWidth1}%`}}></span>
-        {initialSlideValue.length > 2 && <span className={isActive?'Track Slider2':'Slider2 disabledColor'} style={{left:`${trackMinPos2}%`, width:`${trackWidth2}%`}}></span>} 
+        <span className={isActive?'Track Slider1':'Slider1 disabledColor'} 
+            style={{left:`${trackMinPos1}%`, width:`${trackWidth1}%`}}
+        ></span>
+        {initialSlideValue.length > 2 && (
+            <span className={isActive?'Track Slider2':'Slider2 disabledColor'} 
+                style={{left:`${trackMinPos2}%`, width:`${trackWidth2}%`}}
+            ></span>
+        )} 
       </div>
     );
 }
